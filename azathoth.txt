@@ -1,0 +1,6 @@
+
+
+npm install
+npm install electron -g
+npm start
+electron .
