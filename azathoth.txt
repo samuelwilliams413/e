@@ -1,6 +1,13 @@
+npm install && npm install electron -g && npm start && electron .
 
+
+
+npm install --save-dev electron-prebuilt
+
+npm install --save-dev electron-prebuilt && npm install electron -g && npm start && electron .
+
+git clone https://github.com/bojzi/sound-machine-electron-guide.git
+git checkout <sound-machine-tutorial>
+git checkout 00-blank-repository
 
 npm install
-npm install electron -g
-npm start
-electron .

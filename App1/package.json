@@ -1,0 +1,14 @@
+{
+    "name": "app1",
+    "version": "1.0.0",
+    "description": "Shopping List desktop app",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "author": "SMW",
+    "license": "ISC",
+    "dependencies": {
+        "electron": "^1.8.4"
+    }
+}
