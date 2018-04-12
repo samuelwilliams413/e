@@ -1,4 +1,8 @@
 /*jshint esversion: 6 */
+//https://youtu.be/vL6zAxiKcSI?t=41m37s
+
+// set environment
+
 
 const electron = require('electron');
 const app = require('electron').app;
@@ -9,6 +13,8 @@ const path = require('path');
 const { BrowserWindow, ipcMain } = electron;
 let mainWindow;
 let addWindow;
+
+process.env.NODE_ENV = 'production';
 
 // Listen for app to ready
 app.on('ready', function() {
