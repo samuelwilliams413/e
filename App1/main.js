@@ -1,10 +1,12 @@
+/*jshint esversion: 6 */
+
 const electron = require('electron');
 const app = require('electron').app;
 const Menu = require('electron').Menu;
 const url = require('url');
 const path = require('path');
 
-const { BrowserWindow } = electron;
+const { BrowserWindow, ipcMain } = electron;
 let mainWindow;
 let addWindow;
 
@@ -30,10 +32,7 @@ app.on('ready', function() {
 
 });
 
-
-
 // Handle create add window
-
 function createAddWindow() {
     addWindow = new BrowserWindow({
         width: 300,
@@ -53,6 +52,13 @@ function createAddWindow() {
     });
 }
 
+// Catch item:add
+
+ipcMain.on('item:add', function(e, item) {
+    mainWindow.webContents.send('item:add', item);
+    addWindow.close();
+});
+
 // Create menu template
 const mainMenuTemplate = [{
     label: 'File',
@@ -62,7 +68,10 @@ const mainMenuTemplate = [{
             createAddWindow();
         }
     }, {
-        label: 'Clear Items'
+        label: 'Clear Items',
+        click() {
+            mainWindow.webContents.send('item:clear');
+        }
     }, {
         label: 'Quit',
         accelerator: process.platform == 'darwin' ? 'Command+Q' : 'Ctrl+Q',
@@ -71,3 +80,26 @@ const mainMenuTemplate = [{
         }
     }]
 }];
+
+// If mac, add empty object to menu
+if (process.platform == 'dawrin') {
+    mainMenuTemplate.unshift({});
+}
+
+// Add developer tools if not in production
+if (process.env.NODE_ENV !== 'production') {
+    mainMenuTemplate.push({
+        label: 'Developer Tools',
+        submenu: [{
+                label: 'Toggle DevTools',
+                accelerator: process.platform == 'darwin' ? 'Command+I' : 'Ctrl+I',
+                click(item, focusedWindow) {
+                    focusedWindow.toggleDevTools();
+                }
+            },
+            {
+                role: 'reload'
+            }
+        ]
+    });
+}

@@ -1,6 +1,7 @@
 {
     "name": "app1",
     "version": "1.0.0",
+    "esversion": 6,
     "description": "Shopping List desktop app",
     "main": "main.js",
     "scripts": {

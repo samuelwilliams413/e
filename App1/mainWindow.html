@@ -7,6 +7,32 @@
 
 <body>
     <h1>Shopping List</h1>
+    <ul></ul>
+    <script>
+        const electron = require('electron');
+        const {
+            ipcRenderer
+        } = electron;
+        const ul = document.querySelector('ul');
+        // Catch item:add
+        ipcRenderer.on('item:add', function(e, item) {
+            const li = document.createElement('li');
+            const itemText = document.createTextNode(item);
+            li.appendChild(itemText);
+            ul.appendChild(li);
+        });
+        // Catch item:clear
+        ipcRenderer.on('item:clear', function() {
+            ul.innerHTML = '';
+        });
+
+        //remove item
+        ul.addEventListener('dblclick', removeItem);
+
+        function removeItem(e) {
+            e.target.remove();
+        }
+    </script>
 </body>
 
 </html>
