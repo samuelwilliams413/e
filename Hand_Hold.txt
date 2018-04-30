@@ -1,3 +1,5 @@
+npm i -g npm
+
 npm init
 
 npm install --save electron
